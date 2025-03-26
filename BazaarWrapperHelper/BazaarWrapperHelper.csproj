@@ -8,8 +8,12 @@
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="System.Management" Version="9.0.3" />
+	</ItemGroup>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy /Y &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)BazaarWrapper\bin\$(ConfigurationName)\$(TargetFramework)\&quot;" />
+	  <Exec Command="copy /Y &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)BazaarWrapper\bin\$(ConfigurationName)\$(TargetFramework)\&quot;" />
 	</Target>
 
 </Project>

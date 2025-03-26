@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BazaarWrapper": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Program Files\\Tempo Launcher - Beta\\Tempo Launcher - Beta.exe\""
+    }
+  }
+}
