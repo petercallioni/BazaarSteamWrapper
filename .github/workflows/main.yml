@@ -22,7 +22,7 @@ jobs:
 
     # Step 3: Build the projects
     - name: Build BazaarWrapper
-      run: dotnet build BazaarWrapper.sln --configuration Release
+      run: dotnet build BazaarWrapper/BazaarWrapper.sln --configuration Release
 
     # Step 4: Package the output
     - name: Package Output
