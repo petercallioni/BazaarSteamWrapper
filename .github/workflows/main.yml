@@ -1,0 +1,43 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers the workflow when a tag starting with 'v' is pushed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up .NET environment (assuming your project uses .NET)
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0' # Specify your .NET version
+
+    # Step 3: Build the projects
+    - name: Build BazaarWrapper
+      run: dotnet build BazaarWrapper.sln --configuration Release
+
+    # Step 4: Package the output
+    - name: Package Output
+      run: |
+        mkdir -p release
+        cp -r BazaarWrapper/BazaarWrapper/bin/Release/* release/
+
+    # Step 5: Create a GitHub Release
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: release/* # Upload all files in the release folder
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        body: |
+          Automated release for version ${{ github.ref_name }}.
+          Includes the latest build of BazaarWrapper and BazaarWrapperHelper.
